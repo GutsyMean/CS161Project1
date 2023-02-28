@@ -65,9 +65,13 @@ public class AutoLoanCalculator extends Application
 	{
 		//set up default radio buttons
 		rbt24.setToggleGroup(loanTermGroup);
+		rbt24.setUserData(24);
 		rbt36.setToggleGroup(loanTermGroup);
+		rbt36.setUserData(36);
 		rbt48.setToggleGroup(loanTermGroup);
+		rbt48.setUserData(48);
 		rbt60.setToggleGroup(loanTermGroup);
+		rbt60.setUserData(60);
 		rbt24.setSelected(true);
 		
 		//set up default check boxes
@@ -189,7 +193,6 @@ public class AutoLoanCalculator extends Application
 				double salesTaxRate = Double.parseDouble(txtSalesTax.getText());
 				double salesTax = (basePrice - downPayment + getOptionsCost()) * (salesTaxRate/100);
 				double totalLoanAmount = basePrice - downPayment + getOptionsCost() + salesTax;
-				System.out.println(salesTaxRate);
 				double annualInterestRate;
 				
 				if (rbt24.isSelected())
@@ -202,7 +205,6 @@ public class AutoLoanCalculator extends Application
 					annualInterestRate = 5.0/100;
 				
 				double monthlyInterest = annualInterestRate / 12;
-//				int months = 48;
 				int months = Integer.parseInt(loanTermGroup.getSelectedToggle().getUserData().toString());
 				double monthlyPayment = totalLoanAmount * (monthlyInterest * Math.pow(1 + monthlyInterest, months)) / (Math.pow(1 + monthlyInterest, months) - 1);
 				double totalPayment = monthlyPayment * months + downPayment;
